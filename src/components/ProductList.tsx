@@ -1,10 +1,5 @@
 import { Paper } from '@mui/material'
-import {
-  DataGrid,
-  GridCellParams,
-  GridColDef,
-  GridToolbar,
-} from '@mui/x-data-grid'
+import { DataGrid, GridCellParams, GridColDef } from '@mui/x-data-grid'
 import { useAppSelector } from '../app/hooks'
 import {
   ProductsStatus,
@@ -18,6 +13,7 @@ const List = () => {
     {
       field: 'id',
       headerName: 'ID',
+      width: 80,
     },
     {
       field: 'title',
@@ -26,6 +22,7 @@ const List = () => {
     {
       field: 'description',
       headerName: 'Description',
+      width: 400,
     },
     {
       field: 'price',
@@ -34,14 +31,14 @@ const List = () => {
     {
       field: 'thumbnail',
       headerName: 'Image',
-      renderCell: (params: GridCellParams) => (
+      renderCell: ({value}: GridCellParams) => value ? (
         <img
-          src={String(params.value)}
+          src={String(value)}
           alt="thumbnail"
           height={50}
           width={50}
-        />
-      ),
+        /> 
+      ) : null,
     },
     {
       field: 'rating',
@@ -54,17 +51,13 @@ const List = () => {
     {
       field: 'category',
       headerName: 'Category',
+      width: 100,
     },
   ]
 
   return (
-    <div style={{ height: 400, width: '100%' }}>
-      <DataGrid
-        {...{ columns }}
-        rows={products}
-        pagination
-        slots={{ toolbar: GridToolbar }}
-      />
+    <div style={{ height: '90vh', width: '100%' }}>
+      <DataGrid {...{ columns }} rows={products} />
     </div>
   )
 }
