@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { Box, IconButton, Typography } from '@mui/material'
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace'
 import { ROUTES } from '../App'
+import { ProductForm } from '../components/ProductForm'
 
 export const AddProduct = () => {
   return (
@@ -16,6 +17,8 @@ export const AddProduct = () => {
           Add Product
         </Typography>
       </Box>
+
+      <ProductForm />
     </div>
   )
 }

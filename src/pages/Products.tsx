@@ -9,10 +9,10 @@ import { ProductList } from '../components/ProductList'
 
 export const Products = () => {
   const dispatch = useAppDispatch()
-  const { products } = useAppSelector(state => state.products) 
+  const { loaded } = useAppSelector(state => state.products)
 
   useEffect(() => {
-    if (!products.length) {
+    if (!loaded) {
       dispatch(getProductsAsync())
     }
   }, [])

@@ -33,11 +33,13 @@ export enum ProductsStatus {
 export interface Products {
   products: Array<ProductViewData>
   status: ProductsStatus
+  loaded: boolean
 }
 
 const initialState: Products = {
   products: [],
   status: ProductsStatus.IDLE,
+  loaded: false
 }
 
 export const getProductsAsync = createAsyncThunk(
@@ -48,7 +50,11 @@ export const getProductsAsync = createAsyncThunk(
 export const productsSlice = createSlice({
   name: 'products',
   initialState,
-  reducers: {},
+  reducers: {
+    updateList: (state, action) => {
+      state.products = [...state.products, action.payload]
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(getProductsAsync.pending, state => {
@@ -56,6 +62,7 @@ export const productsSlice = createSlice({
       })
       .addCase(getProductsAsync.fulfilled, (state, action) => {
         state.status = ProductsStatus.IDLE
+        state.loaded = true
         state.products = normilizeProductsToView(action.payload.products)
       })
       .addCase(getProductsAsync.rejected, state => {
@@ -64,6 +71,6 @@ export const productsSlice = createSlice({
   },
 })
 
-export const {} = productsSlice.actions
+export const { updateList } = productsSlice.actions
 
 export default productsSlice.reducer

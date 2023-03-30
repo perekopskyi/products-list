@@ -1,5 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { addProduct } from "./productsApi"
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { addProduct } from './productsApi'
+import { updateList } from './productsSlice'
 
 export interface NewProduct {
   title: string
@@ -26,9 +27,14 @@ const initialState = {
 
 export const addProductAsync = createAsyncThunk(
   'products/addProducts',
-  async (body: NewProduct) => await addProduct(body)
-)
+  async (body: NewProduct, { dispatch }) => {
+    const newProduct = await addProduct(body)
+    // Add new product to list of products
+    dispatch(updateList(newProduct))
 
+    return newProduct
+  }
+)
 
 export const productsSlice = createSlice({
   name: 'products',
@@ -52,4 +58,3 @@ export const productsSlice = createSlice({
 export const {} = productsSlice.actions
 
 export default productsSlice.reducer
-
