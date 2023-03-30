@@ -20,7 +20,7 @@ const router = createBrowserRouter([
 ])
 
 export const App = () => (
-  <Container>
+  <Container component="main">
     <RouterProvider router={router} />
     <Outlet />
   </Container>
