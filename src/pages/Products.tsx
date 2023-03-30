@@ -3,14 +3,18 @@ import { Link } from 'react-router-dom'
 import { Box, IconButton, Typography } from '@mui/material'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
 import { ROUTES } from '../App'
-import { useAppDispatch } from '../app/hooks'
+import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { getProductsAsync } from '../features/products/productsSlice'
+import { ProductList } from '../components/ProductList'
 
 export const Products = () => {
   const dispatch = useAppDispatch()
+  const { products } = useAppSelector(state => state.products) 
 
   useEffect(() => {
-    dispatch(getProductsAsync())
+    if (!products.length) {
+      dispatch(getProductsAsync())
+    }
   }, [])
 
   return (
@@ -25,6 +29,8 @@ export const Products = () => {
           </IconButton>
         </Link>
       </Box>
+
+      <ProductList />
     </div>
   )
 }

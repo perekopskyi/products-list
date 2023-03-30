@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { normilizeProductsToView } from '../../utils/normilizeProductsToView'
 import { getProducts } from './productsApi'
 
 export interface Product {
@@ -12,6 +13,17 @@ export interface Product {
   'thumbnail': string
 }
 
+export interface ProductViewData {
+  'id': number
+  'title': string
+  'description': string
+  'price': string
+  'rating': number
+  'stock': number
+  'category': string
+  'thumbnail': string
+}
+
 export enum ProductsStatus {
   IDLE = 'idle',
   LOADING = 'loading',
@@ -19,7 +31,7 @@ export enum ProductsStatus {
 }
 
 export interface Products {
-  products: Array<Product>
+  products: Array<ProductViewData>
   status: ProductsStatus
 }
 
@@ -44,7 +56,7 @@ export const productsSlice = createSlice({
       })
       .addCase(getProductsAsync.fulfilled, (state, action) => {
         state.status = ProductsStatus.IDLE
-        state.products = action.payload.products // TODO ProductViewData(action.payload.products)
+        state.products = normilizeProductsToView(action.payload.products)
       })
       .addCase(getProductsAsync.rejected, state => {
         state.status = ProductsStatus.FAILED
