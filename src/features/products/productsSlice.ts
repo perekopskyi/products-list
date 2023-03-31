@@ -22,6 +22,8 @@ export interface ProductViewData {
   'stock': number
   'category': string
   'thumbnail': string
+  [key: string]: string | number // Add an index signature to allow accessing properties using a string value
+
 }
 
 export enum ProductsStatus {
