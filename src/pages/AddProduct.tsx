@@ -7,7 +7,7 @@ import { ProductForm } from '../components/ProductForm'
 export const AddProduct = () => {
   return (
     <div>
-      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+      <Box sx={{ display: 'flex', alignItems: 'center' }} marginBottom={2}>
         <Link to={ROUTES.ROOT}>
           <IconButton aria-label="back">
             <KeyboardBackspaceIcon />

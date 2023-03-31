@@ -19,7 +19,7 @@ export const Products = () => {
 
   return (
     <div>
-      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+      <Box sx={{ display: 'flex', alignItems: 'center' }} marginBottom={2}>
         <Typography variant="h3" component="h2">
           Products
         </Typography>
