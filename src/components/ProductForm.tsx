@@ -46,7 +46,6 @@ export const ProductForm = () => {
       ) : null}
       <Box marginBottom={2}>
         <TextField
-          required
           id="title"
           name="title"
           label="Title"
